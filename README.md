@@ -6,7 +6,7 @@ University Library Management System
 
 ## Notes
 
-[JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) is required in order to run this program.<br/>
+[JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) is required in order to run this desktop app.<br/>
 
 ## Progress
 
@@ -40,5 +40,5 @@ University Library Management System
 
 #### Disponibility
 
-- [ ] Get loaned books (joinSubscriber: boolean) -> bookId, bookTitle, subscriberId, subscriberFullname
-- [ ] Get availabled books () -> bookId, bookTitle
+- [X] Get loaned books (joinSubscriber: boolean) -> bookId, bookTitle, subscriberId, subscriberFullname
+- [X] Get available books () -> bookId, bookTitle

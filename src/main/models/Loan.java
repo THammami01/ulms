@@ -5,6 +5,9 @@ public class Loan {
     private int bookId;
     private int subscriberId;
 
+    public Loan() {
+    }
+
     public Loan(int id, int bookId, int subscriberId) {
         this.id = id;
         this.bookId = bookId;

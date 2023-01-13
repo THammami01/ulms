@@ -4,6 +4,9 @@ public class Subscriber {
     private int id;
 	private String fullname;
 
+    public Subscriber() {
+    }
+
     public Subscriber(int id, String fullname) {
         this.id = id;
         this.fullname = fullname;

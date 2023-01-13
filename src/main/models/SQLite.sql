@@ -23,3 +23,18 @@ INSERT INTO Loan(bookId, subscriberId) VALUES(1, 1), (2, 2);
 SELECT * FROM Book;
 SELECT * FROM Subscriber;
 SELECT * FROM Loan;
+
+-- LOANED BOOKS; WITHOUT JOINING THE SUBSCRIBER
+SELECT B.id as bookId, B.title as bookTitle
+FROM Loan AS L, Book as B
+WHERE L.bookId = B.id;
+
+-- LOANED BOOKS; BY JOINING THE SUBSCRIBER
+SELECT B.id as bookId, B.title as bookTitle, S.id AS subscriberId, S.fullname AS subscriberFullname
+FROM Loan AS L, Book as B, Subscriber as S
+WHERE L.bookId = B.id AND L.subscriberId = S.id;
+
+-- AVAILABLE BOOKS
+SELECT id as bookId, title as bookTitle
+FROM Book
+WHERE id NOT IN (SELECT bookId FROM Loan);
