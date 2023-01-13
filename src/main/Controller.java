@@ -18,11 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import main.models.DB;
-import main.models.Document;
-import main.models.Etudiant;
-import main.models.Setting;
 import main.useful.Dialog;
-import main.useful.Lang;
 
 import java.io.File;
 import java.net.URL;
@@ -543,9 +539,9 @@ public class Controller implements Initializable {
 
     private String getWelcomeMsg() {
         int h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if (h > 3 && h < 12) return Lang.getEquiv("Bonjour !");
-        if (h >= 12 && h < 18) return Lang.getEquiv("Bon après-midi !");
-        return Lang.getEquiv("Bonsoir !");
+        if (h > 3 && h < 12) return "Bonjour !";
+        if (h >= 12 && h < 18) return "Bon après-midi !";
+        return "Bonsoir !";
     }
 
     public void show(Pane pane) {

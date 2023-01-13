@@ -8,14 +8,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.models.DB;
 import main.useful.Dialog;
-import main.useful.Lang;
+
+import java.util.Objects;
 
 public class Main extends Application {
 	public static Stage primaryStage;
-	public static final String mainDir = "C:\\ISLAIB\\";
-	public static final String softwareDir = "C:\\ISLAIB\\SGRN\\";
-	public static final String docsDir = "C:\\ISLAIB\\SGRN\\Documents\\";
-	public static final String backupsDir = "C:\\ISLAIB\\SGRN\\BackUps\\";
+	public static final String appDir = "C:\\UVT-HICS\\ULMS\\";
+	public static final String backupsDir = "C:\\UVT-HICS\\ULMS\\BackUps\\";
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -25,7 +24,7 @@ public class Main extends Application {
 		if (!DB.connected)
 			Dialog.informDBConnErrAndQuit();
 
-		Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
+		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View.fxml")));
 
 		primaryStage.setTitle("SG de Bibliothèque Universitaire");
 		primaryStage.getIcons().add(new Image("icon.png"));
@@ -38,7 +37,7 @@ public class Main extends Application {
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
 
-			if(!Dialog.confirm(Lang.getEquiv("Quitter"), Lang.getEquiv("Voulez-vous vraiment quitter ?")))
+			if(!Dialog.confirm("Quitter", "Voulez-vous vraiment quitter ?"))
 				return;
 
 			DB.backup();
@@ -53,16 +52,7 @@ public class Main extends Application {
 
 	public static void initDirs() {
 		try {
-			String command = String.format("mkdir %s", mainDir);
-			Runtime.getRuntime().exec("cmd /c " + command);
-
-			command = String.format("mkdir %s", softwareDir);
-			Runtime.getRuntime().exec("cmd /c " + command);
-
-			command = String.format("mkdir %s", docsDir);
-			Runtime.getRuntime().exec("cmd /c " + command);
-
-			command = String.format("mkdir %s", backupsDir);
+			String command = String.format("mkdir %s", backupsDir);
 			Runtime.getRuntime().exec("cmd /c " + command);
 		} catch (Exception e) {
 			e.printStackTrace();
