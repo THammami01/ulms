@@ -18,295 +18,109 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import main.models.DB;
-import main.useful.Dialog;
+import main.utils.Dialog;
 
 import java.io.File;
 import java.net.URL;
 import java.util.*;
 
-// TODO: CUSTOM SHOW ALL (DO NOT USE WINDOWS EXPLORER)
-// TODO: IN SETTINGS: ACTIVATE/DEACTIVATE DELETE, BACKUP, EXPORT ALL DATA, ABOUT ME
-
 public class Controller implements Initializable {
-    @FXML
-    private Label lblInst01;
-    @FXML
-    private Label lblMinis01;
-    @FXML
-    private Label lblUniv01;
-    @FXML
-    private Label lblSG01;
-    @FXML
-    private Label lblCIN03;
-    @FXML
-    private HBox firstRow04;
-    @FXML
-    private HBox secondRow04;
-    @FXML
-    private HBox thirdRow04;
-    @FXML
-    private Label lblCIN04;
-    @FXML
-    private Label lblArchive04;
-    @FXML
-    private Label lblNom04;
-    @FXML
-    private Label lblPrenom04;
-    @FXML
-    private Label lblClasse04;
-    @FXML
-    private Label lblCond04;
-    @FXML
-    private HBox firstRow05;
-    @FXML
-    private HBox secondRow05;
-    @FXML
-    private VBox thirdRow05;
-    @FXML
-    private HBox fourthRow05;
-    @FXML
-    private Label lblCIN05;
-    @FXML
-    private Label lblArchive05;
-    @FXML
-    private Label lblNom05;
-    @FXML
-    private Label lblPrenom05;
-    @FXML
-    private Label lblClasse05;
-    @FXML
-    private Label lblCond05;
-    @FXML
-    private Label lblDocuments05;
-    @FXML
-    private Label lblAucunDoc05;
-    @FXML
-    private Label lblLangue06;
-
-    // PANE 04 & 05 | TRANCHE 2
-    @FXML
-    private Label lblTranche04;
-    @FXML
-    private RadioButton rbTrancheBourse04;
-    @FXML
-    private RadioButton rbTranchePret04;
-    @FXML
-    private RadioButton rbTranchePayee04;
-    @FXML
-    private RadioButton rbTrancheNonPayee04;
-    @FXML
-    private Label lblTranche05;
-    @FXML
-    private RadioButton rbTrancheBourse05;
-    @FXML
-    private RadioButton rbTranchePret05;
-    @FXML
-    private RadioButton rbTranchePayee05;
-    @FXML
-    private RadioButton rbTrancheNonPayee05;
-
-    public enum Tranche2 {
-        BOURSE, PRET, PAYEE, NON_PAYEE, NONE
-    }
-
-    // PANE 07
-    @FXML
-    private Label lblClasse07;
-    @FXML
-    private Label lblSelClasse07;
-    @FXML
-    private VBox allEtudiants07;
-    @FXML
-    private HBox firstRow07;
-    @FXML
-    private ScrollPane secondRow07;
-    @FXML
-    private HBox thirdRow07;
-    @FXML
-    private Label lblSupprimer07;
-    @FXML
-    private Label lblMsg07;
-    @FXML
-    private ComboBox cbClasse07;
-    @FXML
-    private Label lblRetourner07;
-
-    @FXML
-    private VBox vboxCIN04;
-    @FXML
-    private VBox vboxNom04;
-    @FXML
-    private VBox vboxPrenom04;
-    @FXML
-    private VBox vboxClasse04;
-    @FXML
-    private VBox vboxCond04;
-    @FXML
-    private VBox vboxCIN05;
-    @FXML
-    private VBox vboxNom05;
-    @FXML
-    private VBox vboxPrenom05;
-    @FXML
-    private VBox vboxClasse05;
-    @FXML
-    private VBox vboxCond05;
-    @FXML
-    private HBox innerHBoxDocs05;
-
     @FXML
     private VBox paneWelcome;
     @FXML
     private HBox paneMain;
     @FXML
-    private VBox paneRechercher;
+    private VBox paneSubscribers;
     @FXML
-    private VBox paneAjouter;
+    private VBox paneBooks;
     @FXML
-    private VBox paneResultat;
+    private HBox paneLoan;
     @FXML
-    private VBox paneSettings;
-    @FXML
-    private VBox paneClasses;
-    @FXML
-    private Label lblEnactusNYear;
+    private HBox paneDisponibility;
 
+    // 01. WELCOME
     @FXML
-    private Label lblBienvenue01;
+    private Label lblWelcome01;
     @FXML
-    private Button btnContinuer01;
+    private Button btnContinue01;
 
+    // 02. MAIN
     @FXML
-    private Label btnRechercher02;
+    private Label btnSubscribers02;
     @FXML
-    private Label btnAjouter02;
+    private Label btnBooks02;
+    @FXML
+    private Label btnLoan02;
+    @FXML
+    private Label btnDisponibility02;
 
+    // 03. SUBSCRIBERS
     @FXML
-    private TextField txtCIN03;
+    private TextField txtId03;
     @FXML
-    private Label lblValider03;
+    private TextField txtFullname03;
     @FXML
-    private Label lblRetourner03;
+    private Label btnSearch03;
     @FXML
-    private Label lblMsg03;
+    private Label btnInsert03;
     @FXML
-    private Label lblAfficherClasses03;
+    private Label btnUpdate03;
+    @FXML
+    private Label btnDelete03;
+    @FXML
+    private Label btnGoBack03;
+    // FXML TABLE
 
+    // 04. BOOKS
     @FXML
-    private TextField txtCIN04;
+    private TextField txtId04;
     @FXML
-    private TextField txtArchive04;
+    private TextField txtTitle04;
     @FXML
-    private TextField txtNom04;
+    private Label btnSearch04;
     @FXML
-    private TextField txtPrenom04;
+    private Label btnInsert04;
     @FXML
-    private ComboBox<String> cbClasse04;
+    private Label btnUpdate04;
     @FXML
-    private ComboBox<String> cbCond04;
+    private Label btnDelete04;
     @FXML
-    private Label lblAjouter04;
-    @FXML
-    private Label lblInitialiser04;
-    @FXML
-    private Label lblRetourner04;
-    @FXML
-    private Label lblMsg04;
+    private Label btnGoBack04;
+    // FXML TABLE
 
+    // 05. LOAN
     @FXML
-    private HBox fourthRow04;
+    private ComboBox<String> cbSubscriberLoan05;
     @FXML
-    private VBox vboxAC04;
+    private ComboBox<String> cbBookLoan05;
     @FXML
-    private Label lblNomClasse04;
+    private Label btnValidateLoan05;
     @FXML
-    private TextField txtNomClasse04;
+    private ComboBox<String> cbSubscriberReturn05;
     @FXML
-    private Label lblAjouterClasse04;
+    private ComboBox<String> cbBookReturn05;
     @FXML
-    private Label lblMsgAC04;
+    private Label btnValidateReturn05;
+    @FXML
+    private Label btnGoBack05;
 
+    // 06. DISPONIBILITY
+    // FXML TABLES 1 AND 2
     @FXML
-    private TextField txtCIN05;
-    @FXML
-    private TextField txtArchive05;
-    @FXML
-    private TextField txtNom05;
-    @FXML
-    private TextField txtPrenom05;
-    @FXML
-    private ComboBox<String> cbClasse05;
-    @FXML
-    private ComboBox<String> cbCond05;
-    @FXML
-    private Label lblAjouterDoc05;
-    //	@FXML
-//	private Label lblVoirTousDocs05;
-    @FXML
-    private Label lblSupprimerTousDocs05;
-
-    @FXML
-    private VBox allDocuments05;
-    @FXML
-    private Label lblModifier05;
-    @FXML
-    private Label lblSupprimer05;
-    @FXML
-    private Label lblRetourner05;
-    @FXML
-    private Label lblMsg05;
-
+    private Label btnGoBack06;
     @FXML
     private ImageView imgSettings01;
-    @FXML
-    private RadioButton rbArabic06;
-    @FXML
-    private RadioButton rbFrench06;
-    @FXML
-    private RadioButton rbEnglish06;
-    @FXML
-    private Label lblEnregistrer06;
-    @FXML
-    private Label lblRetourner06;
-    @FXML
-    private Label lblMsg06;
 
-    @FXML
-    private ImageView img1;
-    @FXML
-    private ImageView img2;
 
-    private boolean isFileChooserBusy;
 
-    EventHandler modifier05EventHandler = (EventHandler<KeyEvent>) e -> {
-        if (isFileChooserBusy) {
-            isFileChooserBusy = false;
-            return;
-        }
 
-        if (e.getCode() == KeyCode.ENTER && !(e.getSource() instanceof ComboBox))
-            editStudent();
-//			else if (e.getCode() == KeyCode.DELETE)
-//				deleteStudent();
-        else if (e.getCode() == KeyCode.ESCAPE)
-            return05();
-    };
-
-//	@FXML
-//	private ImageView enactus;
-
-    private static String img1URL;
-    private static String img2URL;
-    //	public static String iconURL;
     ArrayList<String> classes;
-    public static String lang;
     public Pane lastPane;
     public Pane currPane;
     public Pane lastPaneReserved;
     public Pane correctCurrPane;
     public boolean isLastClassesPane = false;
 
-    private String lastLang;
     private String currCond04;
     private String currCond05;
 
@@ -341,8 +155,6 @@ public class Controller implements Initializable {
             addDoc();
             setDocs();
         });
-
-//		lblVoirTousDocs05.setOnMouseClicked(e -> openDocsDir());
 
         lblSupprimerTousDocs05.setOnMouseClicked(e -> delAllDocs());
 
@@ -413,16 +225,10 @@ public class Controller implements Initializable {
                 return04();
         });
         cbClasse04.setOnKeyReleased((e) -> {
-//			if (e.getCode() == KeyCode.ENTER)
-//				addStudent();
-//			else
             if (e.getCode() == KeyCode.ESCAPE)
                 return04();
         });
         cbCond04.setOnKeyReleased((e) -> {
-//			if (e.getCode() == KeyCode.ENTER)
-//				addStudent();
-//			else
             if (e.getCode() == KeyCode.ESCAPE)
                 return04();
         });
@@ -460,16 +266,10 @@ public class Controller implements Initializable {
         });
 
         cbClasse07.setOnKeyReleased((e) -> {
-//			if (e.getCode() == KeyCode.DELETE)
-//				deleteClass();
-//			else
             if (e.getCode() == KeyCode.ESCAPE)
                 return07();
         });
         secondRow07.setOnKeyReleased((e) -> {
-//			if (e.getCode() == KeyCode.DELETE)
-//				deleteClass();
-//			else
             if (e.getCode() == KeyCode.ESCAPE)
                 return07();
         });
@@ -496,7 +296,6 @@ public class Controller implements Initializable {
 
         img1URL = img1.getImage().getUrl();
         img2URL = img2.getImage().getUrl();
-//		iconURL = enactus.getImage().getUrl();
 
         setClasses();
 
@@ -567,9 +366,6 @@ public class Controller implements Initializable {
         txtArchive05.setEditable(false);
         txtNom05.setEditable(false);
         txtPrenom05.setEditable(false);
-//		cbClasse05.setEditable(false);
-//		txtCond05.setEditable(false);
-//		lblAjouterDoc05.setDisable(true);
         initDocs();
         lblModifier05.setText(Lang.getEquiv("Modifier"));
         disableInputs05(true);
@@ -589,63 +385,6 @@ public class Controller implements Initializable {
         pane.setVisible(true);
         if (pane != paneSettings)
             correctCurrPane = pane;
-    }
-
-    public void addDoc() {
-//		txtCIN05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-//		txtArchive05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-//		txtNom05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-//		txtPrenom05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-//		cbClasse05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-//		txtCond05.removeEventHandler(KeyEvent.KEY_RELEASED, pane05EventHandler);
-
-        isFileChooserBusy = true;
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(Lang.getEquiv("Choisir Document"));
-        List<File> files = fileChooser.showOpenMultipleDialog(Main.primaryStage);
-
-        if (files == null || files.size() == 0)
-            lblMsg05.setText(Lang.getEquiv("Aucun fichier selectionné."));
-        else {
-            for (File file : files) {
-                Document doc = new Document(Integer.parseInt(txtCIN05.getText()), file.getName());
-                if (!DB.addDoc(doc)) {
-                    lblMsg05.setText(Lang.getEquiv("Erreur lors de l'ajout des documents."));
-                    return;
-                }
-            }
-
-            for (File file : files) {
-                String command = String.format("copy \"%s\" \"%s%s\"", file.getPath(), Main.docsDir, txtCIN05.getText());
-                try {
-                    Runtime.getRuntime().exec("cmd /c " + command);
-                } catch (Exception e) {
-                    lblMsg05.setText(Lang.getEquiv("Erreur lors de l'ajout des documents."));
-                    return;
-                }
-            }
-
-            String wordEnd = files.size() == 0 || files.size() == 1 ? "" : "s";
-            lblMsg05.setText(files.size() + Lang.getEquiv(" document" + wordEnd + " ajouté" + wordEnd + " avec succès."));
-        }
-
-//		txtCIN05.setOnKeyReleased(pane05EventHandler);
-//		txtArchive05.setOnKeyReleased(pane05EventHandler);
-//		txtNom05.setOnKeyReleased(pane05EventHandler);
-//		txtPrenom05.setOnKeyReleased(pane05EventHandler);
-//		cbClasse05.setOnKeyReleased(pane05EventHandler);
-//		txtCond05.setOnKeyReleased(pane05EventHandler);
-    }
-
-    public void openDocsDir() {
-        lblMsg05.setText("");
-        String command = String.format("start %s\"%s\"", Main.docsDir, txtCIN05.getText());
-        try {
-            Runtime.getRuntime().exec("cmd /c " + command);
-            lblMsg05.setText("");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void initDocs() {
@@ -677,7 +416,7 @@ public class Controller implements Initializable {
 
     public void delAllDocs() {
         lblMsg05.setText("");
-        if (!main.useful.Dialog.confirm(Lang.getEquiv("Supprimer Tous Documents"), Lang.getEquiv("Voulez-vous vraiment supprimer tous les documents de cet étudiant ?")))
+        if (!main.utils.Dialog.confirm(Lang.getEquiv("Supprimer Tous Documents"), Lang.getEquiv("Voulez-vous vraiment supprimer tous les documents de cet étudiant ?")))
             return;
 
         if (DB.delDocs(Integer.parseInt(txtCIN05.getText()))) {
@@ -774,10 +513,6 @@ public class Controller implements Initializable {
         setDocs();
         setStudentsByClass();
 
-//		DocumentHBox etudiantsHBox = (DocumentHBox) allDocuments05.getChildren().get(0);
-//		Label lbl = (Label) dhbox.getChildren().get(0);
-//		lbl.setAlignment(Pos.TOP_RIGHT);
-
         if (lang.equals("arabic")) {
             firstRow04.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
             secondRow04.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
@@ -785,26 +520,11 @@ public class Controller implements Initializable {
             secondRow05.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
             firstRow07.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
-//			firstRow04.setAlignment(Pos.TOP_RIGHT);
             secondRow04.setAlignment(Pos.TOP_RIGHT);
             thirdRow04.setAlignment(Pos.BOTTOM_RIGHT);
-//			firstRow05.setAlignment(Pos.TOP_RIGHT);
             secondRow05.setAlignment(Pos.TOP_RIGHT);
             thirdRow05.setAlignment(Pos.TOP_RIGHT);
             fourthRow05.setAlignment(Pos.BOTTOM_RIGHT);
-
-//			lblCIN04.setAlignment(Pos.TOP_RIGHT);
-//			lblArchive04.setAlignment(Pos.TOP_RIGHT);
-//			lblNom04.setAlignment(Pos.TOP_RIGHT);
-//			lblPrenom04.setAlignment(Pos.TOP_RIGHT);
-//			lblClasse04.setAlignment(Pos.TOP_RIGHT);
-//			lblCond04.setAlignment(Pos.TOP_RIGHT);
-//			lblCIN05.setAlignment(Pos.TOP_RIGHT);
-//			lblArchive05.setAlignment(Pos.TOP_RIGHT);
-//			lblNom05.setAlignment(Pos.TOP_RIGHT);
-//			lblPrenom05.setAlignment(Pos.TOP_RIGHT);
-//			lblClasse05.setAlignment(Pos.TOP_RIGHT);
-//			lblCond05.setAlignment(Pos.TOP_RIGHT);
 
             btnRechercher02.toFront();
 
@@ -812,17 +532,6 @@ public class Controller implements Initializable {
 
             lblLangue06.toFront();
             lblEnregistrer06.toFront();
-
-//			vboxCIN04.toFront();
-//			vboxCIN05.toFront();
-
-//			vboxClasse04.toFront();
-//			vboxPrenom04.toFront();
-//			vboxNom04.toFront();
-
-//			vboxClasse05.toFront();
-//			vboxPrenom05.toFront();
-//			vboxNom05.toFront();
 
             lblRetourner04.toFront();
             lblInitialiser04.toFront();
@@ -836,36 +545,12 @@ public class Controller implements Initializable {
             lblRetourner07.toFront();
             lblSupprimer07.toFront();
 
-//			lblVoirTousDocs05.toFront();
             lblAjouterDoc05.toFront();
             lblDocuments05.toFront();
             lblDocuments05.setPadding(new Insets(0, 0, 0, 15));
 
-//			for (Node d : allDocuments05.getChildren()) {
-//				Label lbl = (Label) ((HBox) d).getChildren().get(0);
-//				lbl.setAlignment(Pos.TOP_RIGHT);
-//				System.out.println(lbl.getText());
-//			}
-
-//			txtCIN04.setAlignment(Pos.TOP_RIGHT);
-//			txtArchive04.setAlignment(Pos.TOP_RIGHT);
-//			txtNom04.setAlignment(Pos.TOP_RIGHT);
-//			txtPrenom04.setAlignment(Pos.TOP_RIGHT);
-//			cbClasse04.setStyle("-fx-alignment: right;");
-//			txtCond04.setAlignment(Pos.TOP_RIGHT);
-
-//			txtCIN05.setAlignment(Pos.TOP_RIGHT);
-//			txtArchive05.setAlignment(Pos.TOP_RIGHT);
-//			txtNom05.setAlignment(Pos.TOP_RIGHT);
-//			txtPrenom05.setAlignment(Pos.TOP_RIGHT);
-//			cbClasse05.setStyle("-fx-alignment: right;");
-//			txtCond05.setAlignment(Pos.TOP_RIGHT);
-
-
             // PANE 07
-//			firstRow07.setAlignment(Pos.TOP_RIGHT);
             thirdRow07.setAlignment(Pos.BOTTOM_RIGHT);
-//			lblClasse07.setAlignment(Pos.TOP_RIGHT);
             allEtudiants07.setAlignment(Pos.TOP_RIGHT);
 
 
@@ -884,26 +569,12 @@ public class Controller implements Initializable {
             secondRow05.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
             firstRow07.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 
-//			firstRow04.setAlignment(Pos.TOP_LEFT);
             secondRow04.setAlignment(Pos.TOP_LEFT);
             thirdRow04.setAlignment(Pos.BOTTOM_LEFT);
-//			firstRow05.setAlignment(Pos.TOP_LEFT);
             secondRow05.setAlignment(Pos.TOP_LEFT);
             thirdRow05.setAlignment(Pos.TOP_LEFT);
             fourthRow05.setAlignment(Pos.BOTTOM_LEFT);
 
-//			lblCIN04.setAlignment(Pos.TOP_LEFT);
-//			lblArchive04.setAlignment(Pos.TOP_LEFT);
-//			lblNom04.setAlignment(Pos.TOP_LEFT);
-//			lblPrenom04.setAlignment(Pos.TOP_LEFT);
-//			lblClasse04.setAlignment(Pos.TOP_LEFT);
-//			lblCond04.setAlignment(Pos.TOP_LEFT);
-//			lblCIN05.setAlignment(Pos.TOP_LEFT);
-//			lblArchive05.setAlignment(Pos.TOP_LEFT);
-//			lblNom05.setAlignment(Pos.TOP_LEFT);
-//			lblPrenom05.setAlignment(Pos.TOP_LEFT);
-//			lblClasse05.setAlignment(Pos.TOP_LEFT);
-//			lblCond05.setAlignment(Pos.TOP_LEFT);
 
             btnRechercher02.toBack();
 
@@ -911,17 +582,6 @@ public class Controller implements Initializable {
 
             lblLangue06.toBack();
             lblEnregistrer06.toBack();
-
-//			vboxCIN04.toBack();
-//			vboxCIN05.toBack();
-
-//			vboxPrenom04.toFront();
-//			vboxClasse04.toFront();
-//			vboxCond04.toFront();
-
-//			vboxPrenom05.toFront();
-//			vboxClasse05.toFront();
-//			vboxCond05.toFront();
 
             lblInitialiser04.toFront();
             lblRetourner04.toFront();
@@ -954,31 +614,8 @@ public class Controller implements Initializable {
             lblSupprimerTousDocs05.toFront();
             lblDocuments05.setPadding(new Insets(0, 15, 0, 0));
 
-//			for (Node d : allDocuments05.getChildren()) {
-//				Label lbl = (Label) ((HBox) d).getChildren().get(0);
-//				lbl.setAlignment(Pos.TOP_LEFT);
-//				System.out.println(lbl.getText());
-//			}
-
-//			txtCIN04.setAlignment(Pos.TOP_LEFT);
-//			txtArchive04.setAlignment(Pos.TOP_LEFT);
-//			txtNom04.setAlignment(Pos.TOP_LEFT);
-//			txtPrenom04.setAlignment(Pos.TOP_LEFT);
-//			cbClasse04.setStyle("-fx-alignment: left;");
-//			txtCond04.setAlignment(Pos.TOP_LEFT);
-
-//			txtCIN05.setAlignment(Pos.TOP_LEFT);
-//			txtArchive05.setAlignment(Pos.TOP_LEFT);
-//			txtNom05.setAlignment(Pos.TOP_LEFT);
-//			txtPrenom05.setAlignment(Pos.TOP_LEFT);
-//			cbClasse05.setStyle("-fx-alignment: left;");
-//			txtCond05.setAlignment(Pos.TOP_LEFT);
-
-
             // PANE 07
-//			firstRow07.setAlignment(Pos.TOP_LEFT);
             thirdRow07.setAlignment(Pos.BOTTOM_LEFT);
-//			lblClasse07.setAlignment(Pos.TOP_LEFT);
             allEtudiants07.setAlignment(Pos.TOP_LEFT);
         }
 
@@ -1128,11 +765,6 @@ public class Controller implements Initializable {
             return;
         }
 
-//		if (!classes.contains(cbClasse04.getValue().toUpperCase())) {
-//			lblMsg04.setText(Lang.getEquiv("La classe entrée n'existe pas."));
-//			return;
-//		}
-
         try {
             Etudiant e1 = new Etudiant(Integer.parseInt(txtCIN04.getText()),
                     txtArchive04.getText(),
@@ -1149,8 +781,7 @@ public class Controller implements Initializable {
                 )) {
                     show(paneRechercher);
                     txtCIN03.setText(String.format("%08d", e1.getCin()));
-					lblMsg03.setText(Lang.getEquiv("Cliquer sur Valider pour modifier les informations de l'étudiant."));
-//					setEquivCond(); BRXX1
+                    lblMsg03.setText(Lang.getEquiv("Cliquer sur Valider pour modifier les informations de l'étudiant."));
                 } else {
                     lblMsg04.setText(Lang.getEquiv("Il existe un étudiant avec la même CIN."));
                 }
@@ -1191,14 +822,10 @@ public class Controller implements Initializable {
             txtArchive05.setEditable(true);
             txtNom05.setEditable(true);
             txtPrenom05.setEditable(true);
-//			cbClasse05.setEditable(true);
-//			txtCond05.setEditable(true);
             lblModifier05.setText(Lang.getEquiv("Enregistrer"));
             lblRetourner05.setText(Lang.getEquiv("Annuler"));
             lblMsg05.setText("");
             disableInputs05(false);
-
-//			lblAjouterDoc05.setDisable(false);
         } else {
             if (txtArchive05.getText().isEmpty() || txtNom05.getText().isEmpty() ||
                     txtPrenom05.getText().isEmpty()) {
@@ -1215,11 +842,6 @@ public class Controller implements Initializable {
                 lblMsg05.setText(Lang.getEquiv("Aucune condition selectionnée."));
                 return;
             }
-
-//			if (!classes.contains(cbClasse05.getValue().toUpperCase())) {
-//				lblMsg05.setText(Lang.getEquiv("La classe entrée n'existe pas."));
-//				return;
-//			}
 
             try {
                 Etudiant e1 = new Etudiant(
@@ -1244,9 +866,6 @@ public class Controller implements Initializable {
             txtArchive05.setEditable(false);
             txtNom05.setEditable(false);
             txtPrenom05.setEditable(false);
-//			cbClasse05.setEditable(false);
-//			txtCond05.setEditable(false);
-//			lblAjouterDoc05.setDisable(true);
             disableInputs05(true);
             lblModifier05.setText(Lang.getEquiv("Modifier"));
             lblRetourner05.setText(Lang.getEquiv("Retourner"));
@@ -1255,7 +874,7 @@ public class Controller implements Initializable {
 
     private void deleteStudent() {
         lblMsg05.setText("");
-        if (!main.useful.Dialog.confirm(Lang.getEquiv("Supprimer Étudiant"), Lang.getEquiv("Voulez-vous vraiment supprimer cet étudiant ?"))) {
+        if (!main.utils.Dialog.confirm(Lang.getEquiv("Supprimer Étudiant"), Lang.getEquiv("Voulez-vous vraiment supprimer cet étudiant ?"))) {
             return;
         }
 
@@ -1279,9 +898,6 @@ public class Controller implements Initializable {
     public void return05() {
         if (lblModifier05.getText().equals(Lang.getEquiv("Modifier"))) {
             if (lastPaneReserved == paneAjouter) {
-//			    setEquivCond();  BRXX2
-//			    show(paneAjouter);
-//				System.out.println(currCond04);
             } else if (isLastClassesPane) show(paneClasses);
             else show(paneRechercher);
         } else {
@@ -1342,8 +958,7 @@ public class Controller implements Initializable {
             return;
         }
 
-        if (!main.useful.Dialog.confirm(Lang.getEquiv("Supprimer Classe"), Lang.getEquiv("Voulez-vous vraiment supprimer cette classe avec tous ses données ?"))) {
-//				lblMsg07.setText(Lang.getEquiv("Aucun classe supprimé."));
+        if (!main.utils.Dialog.confirm(Lang.getEquiv("Supprimer Classe"), Lang.getEquiv("Voulez-vous vraiment supprimer cette classe avec tous ses données ?"))) {
             return;
         }
 
@@ -1623,8 +1238,6 @@ public class Controller implements Initializable {
             if ("arabic".equals(lang)) lblAucun.setPadding(new Insets(3, 5, 0, 0));
             else lblAucun.setPadding(new Insets(3, 0, 0, 0));
 
-//			setAlignment(Pos.CENTER_LEFT);
-//			setPrefHeight(25);
             setPrefWidth(USE_COMPUTED_SIZE);
             getChildren().add(lblAucun);
         }

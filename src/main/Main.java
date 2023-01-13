@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.models.DB;
-import main.useful.Dialog;
+import main.utils.Dialog;
 
 import java.util.Objects;
 

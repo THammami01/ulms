@@ -1,7 +1,7 @@
 package main.models;
 
 import main.Main;
-import main.useful.Logger;
+import main.utils.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;

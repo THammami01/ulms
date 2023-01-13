@@ -54,14 +54,14 @@
       </HBox>
       <StackPane VBox.vgrow="ALWAYS">
          <children>
-            <VBox fx:id="paneWelcome" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" styleClass="container" visible="false">
+            <VBox fx:id="paneWelcome" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" styleClass="container">
                <children>
-                  <Label fx:id="lblBienvenue01">
+                  <Label fx:id="lblWelcome01">
                      <font>
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnContinuer01" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="btnContinuer" text="Continuer" textFill="WHITE">
+                  <Button fx:id="btnContinue01" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="btnContinuer" text="Continuer" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -75,7 +75,7 @@
                <children>
                   <VBox maxHeight="100.0">
                      <children>
-                        <Label fx:id="btnRechercher02" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="150.0" prefHeight="40.0" styleClass="btnRechercher" text="Abonnées" textAlignment="CENTER">
+                        <Label fx:id="btnSubscribers02" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="150.0" prefHeight="40.0" styleClass="btnRechercher" text="Abonnées" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -86,7 +86,7 @@
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="btnRechercher021" alignment="CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="100.0" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Emprunt" textAlignment="CENTER">
+                        <Label fx:id="btnLoan02" alignment="CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="100.0" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Emprunt" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -101,7 +101,7 @@
                   </VBox>
                   <VBox maxHeight="100.0">
                      <children>
-                        <Label fx:id="btnAjouter02" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Livres">
+                        <Label fx:id="btnBooks02" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Livres">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -112,7 +112,7 @@
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="btnAjouter021" alignment="CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Disponibilité">
+                        <Label fx:id="btnDisponibility02" alignment="CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" minHeight="50.0" minWidth="150.0" styleClass="btnRechercher" text="Disponibilité">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -127,7 +127,7 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox spacing="20.0">
+            <VBox fx:id="paneSubscribers" spacing="20.0" visible="false">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement des abonnés">
                      <font>
@@ -153,7 +153,7 @@
                                                 <Insets left="4.0" right="4.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="txtCIN041" alignment="BASELINE_LEFT" />
+                                          <TextField fx:id="txtId03" alignment="BASELINE_LEFT" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -173,14 +173,14 @@
                                                 <Insets left="4.0" right="4.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="txtCIN0411" alignment="BASELINE_LEFT" prefWidth="200.0" />
+                                          <TextField fx:id="txtFullname03" alignment="BASELINE_LEFT" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
                               <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                  <children>
-                                    <Label fx:id="lblAjouter041" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Recherche" textAlignment="CENTER">
+                                    <Label fx:id="btnSearch03" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Recherche" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -191,7 +191,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label fx:id="lblInitialiser041" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Insertion">
+                                    <Label fx:id="btnInsert03" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Insertion">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -199,7 +199,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner0411" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="Modification">
+                                    <Label fx:id="btnUpdate03" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="Modification">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -207,7 +207,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner04111" alignment="CENTER" layoutX="10.0" layoutY="86.0" prefWidth="120.0" styleClass="btnRetourner" text="Suppression">
+                                    <Label fx:id="btnDelete03" alignment="CENTER" layoutX="10.0" layoutY="86.0" prefWidth="120.0" styleClass="btnRetourner" text="Suppression">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -215,7 +215,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner041" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
+                                    <Label fx:id="btnGoBack03" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -249,7 +249,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" spacing="20.0" visible="false">
+            <VBox fx:id="paneBooks" layoutX="10.0" layoutY="10.0" spacing="20.0" visible="false">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement des livres">
                      <font>
@@ -275,7 +275,7 @@
                                                 <Insets left="4.0" right="4.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="txtCIN0411" alignment="BASELINE_LEFT" />
+                                          <TextField fx:id="txtId04" alignment="BASELINE_LEFT" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -295,14 +295,14 @@
                                                 <Insets left="4.0" right="4.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="txtCIN04111" alignment="BASELINE_LEFT" prefWidth="200.0" />
+                                          <TextField fx:id="txtTitle04" alignment="BASELINE_LEFT" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
                               <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                  <children>
-                                    <Label fx:id="lblAjouter0411" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Recherche" textAlignment="CENTER">
+                                    <Label fx:id="btnSearch04" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Recherche" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -313,7 +313,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label fx:id="lblInitialiser0411" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Insertion">
+                                    <Label fx:id="btnInsert04" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Insertion">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -321,7 +321,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner04111" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="Modification">
+                                    <Label fx:id="btnUpdate04" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="Modification">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -329,7 +329,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner041111" alignment="CENTER" layoutX="10.0" layoutY="86.0" prefWidth="120.0" styleClass="btnRetourner" text="Suppression">
+                                    <Label fx:id="btnDelete04" alignment="CENTER" layoutX="10.0" layoutY="86.0" prefWidth="120.0" styleClass="btnRetourner" text="Suppression">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -337,7 +337,7 @@
                                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="lblRetourner0411" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
+                                    <Label fx:id="btnGoBack04" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -371,7 +371,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox visible="false">
+            <HBox fx:id="paneLoan" visible="false">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -399,7 +399,7 @@
                                                       <Insets left="4.0" right="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <ComboBox fx:id="cbClasse041" prefWidth="275.0">
+                                                <ComboBox fx:id="cbSubscriberLoan05" prefWidth="275.0">
                                                    <cursor>
                                                       <Cursor fx:constant="DEFAULT" />
                                                    </cursor>
@@ -423,7 +423,7 @@
                                                       <Insets left="4.0" right="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <ComboBox fx:id="cbClasse0411" prefWidth="275.0">
+                                                <ComboBox fx:id="cbBookLoan05" prefWidth="275.0">
                                                    <cursor>
                                                       <Cursor fx:constant="DEFAULT" />
                                                    </cursor>
@@ -434,7 +434,7 @@
                                     </HBox>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="lblAjouter04111" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
+                                          <Label fx:id="btnValidateLoan05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -445,7 +445,7 @@
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Label fx:id="lblRetourner04111" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
+                                          <Label fx:id="btnGoBack05" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -499,7 +499,7 @@
                                                       <Insets left="4.0" right="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <ComboBox fx:id="cbClasse0412" prefWidth="275.0">
+                                                <ComboBox fx:id="cbSubscriberReturn05" prefWidth="275.0">
                                                    <cursor>
                                                       <Cursor fx:constant="DEFAULT" />
                                                    </cursor>
@@ -523,7 +523,7 @@
                                                       <Insets left="4.0" right="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <ComboBox fx:id="cbClasse0413" prefWidth="275.0">
+                                                <ComboBox fx:id="cbBookReturn05" prefWidth="275.0">
                                                    <cursor>
                                                       <Cursor fx:constant="DEFAULT" />
                                                    </cursor>
@@ -534,7 +534,7 @@
                                     </HBox>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="lblAjouter041111" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
+                                          <Label fx:id="btnValidateReturn05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -575,7 +575,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" visible="false">
+            <HBox fx:id="paneDisponibility" layoutX="10.0" layoutY="10.0" visible="false">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -601,7 +601,7 @@
                                     </TableView>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="lblRetourner041112" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
+                                          <Label fx:id="btnGoBack06" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -651,7 +651,7 @@
                                     </TableView>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="lblRetourner0411121" alignment="CENTER" disable="true" prefWidth="120.0" styleClass="btnRetourner" visible="false">
+                                          <Label alignment="CENTER" disable="true" prefWidth="120.0" styleClass="btnRetourner" visible="false">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -694,17 +694,6 @@
                </HBox.margin>
             </AnchorPane>
             <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-            <ImageView fx:id="imgSettings01" fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/settings.jpg" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </ImageView>
          </children>
       </HBox>
    </children>

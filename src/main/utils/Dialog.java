@@ -1,4 +1,4 @@
-package main.useful;
+package main.utils;
 
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
