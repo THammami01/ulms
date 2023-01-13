@@ -3,6 +3,7 @@ package main.utils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -59,6 +60,27 @@ public class Dialog {
         stage.showAndWait();
 
         return btnYesClicked;
+    }
+
+    public static void inform(String title, String contentText, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contentText);
+
+        alert.showAndWait();
+    }
+
+    public static void informInfo(String contentText) {
+        inform("Info", contentText, Alert.AlertType.INFORMATION);
+    }
+
+    public static void informSuccess(String contentText) {
+        inform("Succès", contentText, Alert.AlertType.CONFIRMATION);
+    }
+
+    public static void informError(String contentText) {
+        inform("Erreur", contentText, Alert.AlertType.ERROR);
     }
 
     public static void informDBConnErrAndQuit() {

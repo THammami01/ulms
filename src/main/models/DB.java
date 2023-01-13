@@ -86,15 +86,26 @@ public class DB {
         }
     }
 
+    public static ArrayList<Book> getBooks() {
+        return getBooks(null);
+    }
+
     public static ArrayList<Book> getBooks(Book book) {
-        query = "SELECT * FROM Book WHERE id = ? OR title = ? ORDER BY id DESC, title;";
+        if (book == null)
+            query = "SELECT * FROM Book ORDER BY id DESC, title;";
+        else
+            query = "SELECT * FROM Book WHERE id = ? OR title = ? ORDER BY id DESC, title;";
 
         ArrayList<Book> books = new ArrayList<>();
 
         try {
             pst = connection.prepareStatement(query);
-            pst.setInt(1, book.getId());
-            pst.setString(2, book.getTitle());
+
+            if(book != null) {
+                pst.setInt(1, book.getId());
+                pst.setString(2, book.getTitle());
+            }
+
             rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -160,23 +171,35 @@ public class DB {
         return false;
     }
 
+    public static ArrayList<Subscriber> getSubscribers() {
+        return getSubscribers(null);
+    }
+
     public static ArrayList<Subscriber> getSubscribers(Subscriber subscriber) {
-        query = "SELECT * FROM Subscriber WHERE id = ? OR fullname = ? ORDER BY id DESC, fullname;";
+        if (subscriber == null)
+            query = "SELECT * FROM Subscriber ORDER BY id DESC, fullname;";
+        else
+            query = "SELECT * FROM Subscriber WHERE id = ? OR fullname = ? ORDER BY id DESC, fullname;";
 
         ArrayList<Subscriber> subscribers = new ArrayList<>();
 
         try {
             pst = connection.prepareStatement(query);
-            pst.setInt(1, subscriber.getId());
-            pst.setString(2, subscriber.getFullname());
+
+            if (subscriber != null) {
+                pst.setInt(1, subscriber.getId());
+                pst.setString(2, subscriber.getFullname());
+            }
+
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                Subscriber iterBook = new Subscriber(
+                Subscriber iterSubscriber = new Subscriber(
                         rs.getInt("id"),
                         rs.getString("fullname")
                 );
-                subscribers.add(iterBook);
+
+                subscribers.add(iterSubscriber);
             }
 
             return subscribers;

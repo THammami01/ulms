@@ -13,7 +13,7 @@ University Library Management System
 ### UI Integration
 
 - [ ] Books
-- [ ] Subscribers
+- [X] Subscribers
 - [ ] Loan
 - [ ] Disponibility
 
