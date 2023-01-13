@@ -145,7 +145,7 @@ public class Controller implements Initializable {
         idCol.setMinWidth(125);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Subscriber, String> fullnameCol = new TableColumn<>("Nom complet");
+        TableColumn<Subscriber, String> fullnameCol = new TableColumn<>("Nom");
         fullnameCol.setMinWidth(125);
         fullnameCol.setCellValueFactory(new PropertyValueFactory<>("fullname"));
 
@@ -234,15 +234,44 @@ public class Controller implements Initializable {
 
     // === START OF BOOKS PANE LOGIC ===
     private void runBooksPaneLogic() {
-        setBooksTableRows();
+        initializeBooksTable();
+        btnSearch04.setOnMouseClicked(e -> searchBooks());
         btnInsert04.setOnMouseClicked(e -> insertBook());
         btnUpdate04.setOnMouseClicked(e -> updateBook());
         btnDelete04.setOnMouseClicked(e -> deleteBook());
         btnGoBack04.setOnMouseClicked(e -> showPane(paneMain));
     }
 
-    private void setBooksTableRows() {
-        // TODO
+    private void initializeBooksTable() {
+        TableColumn<Book, Integer> idCol = new TableColumn<>("Identifiant");
+        idCol.setMinWidth(125);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        TableColumn<Book, String> titleCol = new TableColumn<>("Titre");
+        titleCol.setMinWidth(125);
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        tblBooks04.getColumns().addAll(idCol, titleCol);
+    }
+
+    private void updateBooksTableRows() {
+        tblBooks04.getItems().clear();
+        tblBooks04.getItems().addAll(DB.getBooks());
+    }
+
+    private void searchBooks() {
+        Book book;
+
+        if (txtId04.getText().isEmpty() && txtTitle04.getText().isEmpty())
+            book = null;
+        else
+            book = new Book(
+                    txtId04.getText().isEmpty() ? -1 : Integer.parseInt(txtId04.getText()),
+                    txtTitle04.getText()
+            );
+
+        tblBooks04.getItems().clear();
+        tblBooks04.getItems().addAll(DB.getBooks(book));
     }
 
     private void insertBook() {
@@ -255,9 +284,10 @@ public class Controller implements Initializable {
             Book book = new Book();
             book.setTitle(txtTitle04.getText());
 
-            if (DB.insertBook(book))
+            if (DB.insertBook(book)) {
                 Dialog.informSuccess("Livre ajouté avec succès.");
-            else throw new RuntimeException();
+                updateBooksTableRows();
+            } else throw new RuntimeException();
         } catch (Exception e) {
             Dialog.informError("Erreur lors de l'ajout.");
         }
@@ -275,9 +305,10 @@ public class Controller implements Initializable {
                     txtTitle04.getText()
             );
 
-            if (DB.updateBook(book))
+            if (DB.updateBook(book)) {
                 Dialog.informSuccess("Livre modifié avec succès.");
-            else throw new RuntimeException();
+                updateBooksTableRows();
+            } else throw new RuntimeException();
         } catch (Exception e) {
             Dialog.informError("Erreur lors de la modification.");
         }
@@ -293,9 +324,10 @@ public class Controller implements Initializable {
             Book book = new Book();
             book.setId(Integer.parseInt(txtId04.getText()));
 
-            if (DB.deleteBook(book))
-                Dialog.informSuccess("Le livre à été supprimé avec succès..");
-            else throw new RuntimeException();
+            if (DB.deleteBook(book)) {
+                Dialog.informSuccess("Livre supprimé avec succès.");
+                updateBooksTableRows();
+            } else throw new RuntimeException();
         } catch (Exception e) {
             Dialog.informError("Erreur lors de la suppression.");
         }
@@ -326,6 +358,7 @@ public class Controller implements Initializable {
         paneDisponibility.setVisible(false);
 
         if (pane == paneSubscribers) updateSubscribersTableRows();
+        if (pane == paneBooks) updateBooksTableRows();
 
         pane.setVisible(true);
         currPane = pane;

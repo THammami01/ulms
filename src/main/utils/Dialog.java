@@ -76,7 +76,7 @@ public class Dialog {
     }
 
     public static void informSuccess(String contentText) {
-        inform("Succès", contentText, Alert.AlertType.CONFIRMATION);
+        inform("Succès", contentText, Alert.AlertType.INFORMATION);
     }
 
     public static void informError(String contentText) {
