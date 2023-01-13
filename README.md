@@ -8,6 +8,12 @@ University Library Management System
 
 [JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) is required in order to run this desktop app.<br/>
 
+## Dev Tools
+
+- IntelliJ IDEA
+- Scene Builder
+- DB Browser for SQLite
+
 ## Progress
 
 ### UI Integration
