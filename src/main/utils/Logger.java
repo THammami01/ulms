@@ -2,13 +2,7 @@ package main.utils;
 
 import java.util.Calendar;
 
-/**
- * Hi.
- */
 public class Logger {
-  /**
-   * Hello.
-   */
   public static String getDatetime() {
     Calendar cal = Calendar.getInstance();
     return String.format("%04d-%02d-%02d %02d-%02d-%02d",
