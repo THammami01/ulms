@@ -360,7 +360,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox fx:id="paneLoan" visible="false">
+            <HBox fx:id="paneLoan">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -564,7 +564,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="paneDisponibility" layoutX="10.0" layoutY="10.0">
+            <HBox fx:id="paneDisponibility" layoutX="10.0" layoutY="10.0" visible="false">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>

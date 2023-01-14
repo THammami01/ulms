@@ -8,6 +8,11 @@ public class Loan {
     public Loan() {
     }
 
+    public Loan(int bookId, int subscriberId) {
+        this.bookId = bookId;
+        this.subscriberId = subscriberId;
+    }
+
     public Loan(int id, int bookId, int subscriberId) {
         this.id = id;
         this.bookId = bookId;

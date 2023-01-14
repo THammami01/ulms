@@ -101,7 +101,7 @@ public class DB {
         try {
             pst = connection.prepareStatement(query);
 
-            if(book != null) {
+            if (book != null) {
                 pst.setInt(1, book.getId());
                 pst.setString(2, book.getTitle());
             }
@@ -300,7 +300,8 @@ public class DB {
             if (joinSubscriber) {
                 query = "SELECT B.id as bookId, B.title as bookTitle, S.id AS subscriberId, S.fullname AS subscriberFullname " +
                         "FROM Loan AS L, Book as B, Subscriber as S " +
-                        "WHERE L.bookId = B.id AND L.subscriberId = S.id;";
+                        "WHERE L.bookId = B.id AND L.subscriberId = S.id " +
+                        "ORDER BY L.bookId DESC;";
 
                 rs = st.executeQuery(query);
 
@@ -316,7 +317,9 @@ public class DB {
             } else {
                 query = "SELECT B.id as bookId, B.title as bookTitle " +
                         "FROM Loan AS L, Book as B " +
-                        "WHERE L.bookId = B.id;";
+                        "WHERE L.bookId = B.id " +
+                        "ORDER BY L.bookId DESC;";
+
 
                 rs = st.executeQuery(query);
 
@@ -341,7 +344,8 @@ public class DB {
     public static ArrayList<BookToLoan> getAvailableBooks() {
         query = "SELECT id as bookId, title as bookTitle " +
                 "FROM Book " +
-                "WHERE id NOT IN (SELECT bookId FROM Loan);";
+                "WHERE id NOT IN (SELECT bookId FROM Loan) " +
+                "ORDER BY id DESC;";
 
         ArrayList<BookToLoan> books = new ArrayList<>();
 

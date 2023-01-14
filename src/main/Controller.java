@@ -9,14 +9,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import main.models.Book;
-import main.models.BookToLoan;
-import main.models.DB;
-import main.models.Subscriber;
+import main.models.*;
 import main.utils.Dialog;
 
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
     @FXML
@@ -344,7 +342,77 @@ public class Controller implements Initializable {
 
     // === START OF LOAN PANE LOGIC ===
     private void runLoanPaneLogic() {
+        updateLoanComboBoxesOptions();
+        btnValidateLoan05.setOnMouseClicked(e -> validateLoan());
+        btnValidateReturn05.setOnMouseClicked(e -> validateReturn());
         btnGoBack05.setOnMouseClicked(e -> showPane(paneMain));
+    }
+
+    private void updateLoanComboBoxesOptions() {
+        List<Subscriber> subscribers = DB.getSubscribers();
+        List<BookToLoan> availableBooks = DB.getAvailableBooks();
+        List<BookToLoan> loanedBooks = DB.getLoanedBooks();
+
+        List<String> subscribersOptions = subscribers.stream()
+                .map(subscriber -> "[" + subscriber.getId() + "] " + subscriber.getFullname())
+                .collect(Collectors.toList());
+        List<String> availableBooksOptions = availableBooks.stream()
+                .map(book -> "[" + book.getBookId() + "] " + book.getBookTitle())
+                .collect(Collectors.toList());
+        List<String> loanedBooksOptions = loanedBooks.stream()
+                .map(book -> "[" + book.getBookId() + "] " + book.getBookTitle())
+                .collect(Collectors.toList());
+
+        cbSubscriberLoan05.getItems().clear();
+        cbSubscriberLoan05.getItems().addAll(subscribersOptions);
+        cbBookLoan05.getItems().clear();
+        cbBookLoan05.getItems().addAll(availableBooksOptions);
+        cbSubscriberReturn05.getItems().clear();
+        cbSubscriberReturn05.getItems().addAll(subscribersOptions);
+        cbBookReturn05.getItems().clear();
+        cbBookReturn05.getItems().addAll(loanedBooksOptions);
+    }
+
+    private void validateLoan() {
+        if (cbSubscriberLoan05.getSelectionModel().isEmpty() || cbBookLoan05.getSelectionModel().isEmpty()) {
+            Dialog.informInfo("Le livre et son emprunteur doivent être sélectionnés.");
+            return;
+        }
+
+        try {
+            int subscriberId = getIdFromOptionValue(cbSubscriberLoan05.getValue());
+            int bookId = getIdFromOptionValue(cbBookLoan05.getValue());
+
+            if (DB.loanBook(new Loan(bookId, subscriberId))) {
+                Dialog.informSuccess("Livre emprunté avec succès.");
+                updateLoanComboBoxesOptions();
+            } else throw new RuntimeException();
+        } catch (Exception e) {
+            Dialog.informError("Erreur lors de l'emprunt.");
+        }
+    }
+
+    private void validateReturn() {
+        if (cbSubscriberReturn05.getSelectionModel().isEmpty() || cbBookReturn05.getSelectionModel().isEmpty()) {
+            Dialog.informInfo("Le livre et son emprunteur doivent être sélectionnés.");
+            return;
+        }
+
+        try {
+            int subscriberId = getIdFromOptionValue(cbSubscriberReturn05.getValue());
+            int bookId = getIdFromOptionValue(cbBookReturn05.getValue());
+
+            if (DB.returnBook(new Loan(bookId, subscriberId))) {
+                Dialog.informSuccess("Livre retourné avec succès.");
+                updateLoanComboBoxesOptions();
+            } else throw new RuntimeException();
+        } catch (Exception e) {
+            Dialog.informError("Erreur lors du retour.");
+        }
+    }
+
+    private Integer getIdFromOptionValue(String optionValue) {
+        return Integer.parseInt(optionValue.split("]")[0].substring(1));
     }
     // === END OF LOAN PANE LOGIC ===
 
@@ -359,12 +427,14 @@ public class Controller implements Initializable {
         tblAvailableBooks06.setPlaceholder(new Label("Aucun livre disponible trouvé."));
 
         TableColumn<BookToLoan, Integer> loanedBookIdCol = new TableColumn<>("ID Livre");
+        loanedBookIdCol.setPrefWidth(70);
         loanedBookIdCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
 
         TableColumn<BookToLoan, String> loanedBookTitleCol = new TableColumn<>("Titre Livre");
         loanedBookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
 
         TableColumn<BookToLoan, Integer> loanedSubscriberIdCol = new TableColumn<>("ID Emprunteur");
+        loanedSubscriberIdCol.setPrefWidth(70);
         loanedSubscriberIdCol.setCellValueFactory(new PropertyValueFactory<>("subscriberId"));
 
         TableColumn<BookToLoan, String> loanedSubscriberFullnameCol = new TableColumn<>("Nom Emprunteur");
@@ -378,6 +448,7 @@ public class Controller implements Initializable {
         );
 
         TableColumn<BookToLoan, Integer> availableBookIdCol = new TableColumn<>("ID Livre");
+        availableBookIdCol.setPrefWidth(70);
         availableBookIdCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
 
         TableColumn<BookToLoan, String> availableBookTitleCol = new TableColumn<>("Titre Livre");
@@ -411,6 +482,7 @@ public class Controller implements Initializable {
 
         if (pane == paneSubscribers) updateSubscribersTableRows();
         if (pane == paneBooks) updateBooksTableRows();
+        if (pane == paneLoan) updateLoanComboBoxesOptions();
         if (pane == paneDisponibility) updateDisponibilityTablesRows();
 
         pane.setVisible(true);
