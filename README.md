@@ -21,7 +21,7 @@ University Library Management System
 - [X] Books
 - [X] Subscribers
 - [ ] Loan
-- [ ] Disponibility
+- [X] Disponibility
 
 ### DB Operations
 

@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -244,7 +243,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="paneBooks" layoutX="10.0" layoutY="10.0" spacing="20.0">
+            <VBox fx:id="paneBooks" layoutX="10.0" layoutY="10.0" spacing="20.0" visible="false">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enregistrement des livres">
                      <font>
@@ -424,7 +423,7 @@
                                     </HBox>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="btnValidateLoan05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
+                                          <Label fx:id="btnValidateLoan05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Validation" textAlignment="CENTER">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -524,7 +523,7 @@
                                     </HBox>
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
-                                          <Label fx:id="btnValidateReturn05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Valider" textAlignment="CENTER">
+                                          <Label fx:id="btnValidateReturn05" alignment="CENTER" prefWidth="120.0" styleClass="lblPrimary" text="Validation" textAlignment="CENTER">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -565,7 +564,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="paneDisponibility" layoutX="10.0" layoutY="10.0" visible="false">
+            <HBox fx:id="paneDisponibility" layoutX="10.0" layoutY="10.0">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -581,14 +580,7 @@
                            <children>
                               <VBox fx:id="paneAjouter1111" alignment="CENTER" prefHeight="377.0" prefWidth="207.0" spacing="20.0" styleClass="container" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="ID Livre" />
-                                        <TableColumn prefWidth="75.0" text="Titre Livre" />
-                                          <TableColumn prefWidth="75.0" text="ID Emprunteur" />
-                                          <TableColumn prefWidth="75.0" text="Nom Emprunteur" />
-                                      </columns>
-                                    </TableView>
+                                    <TableView fx:id="tblLoanedBooks06" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
                                           <Label fx:id="btnGoBack06" alignment="CENTER" prefWidth="120.0" styleClass="btnRetourner" text="⬅">
@@ -633,12 +625,7 @@
                            <children>
                               <VBox fx:id="paneAjouter11111" alignment="CENTER" prefHeight="377.0" prefWidth="207.0" spacing="20.0" styleClass="container" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="ID Livre" />
-                                          <TableColumn prefWidth="75.0" text="Titre Livre" />
-                                       </columns>
-                                    </TableView>
+                                    <TableView fx:id="tblAvailableBooks06" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                                     <VBox maxWidth="-Infinity" prefWidth="687.0" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" disable="true" prefWidth="120.0" styleClass="btnRetourner" visible="false">

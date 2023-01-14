@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import main.models.Book;
+import main.models.BookToLoan;
 import main.models.DB;
 import main.models.Subscriber;
 import main.utils.Dialog;
@@ -100,7 +101,10 @@ public class Controller implements Initializable {
     private Label btnGoBack05;
 
     // 06. DISPONIBILITY
-    // FXML TABLES 1 AND 2
+    @FXML
+    private TableView<BookToLoan> tblLoanedBooks06;
+    @FXML
+    private TableView<BookToLoan> tblAvailableBooks06;
     @FXML
     private Label btnGoBack06;
 
@@ -141,6 +145,8 @@ public class Controller implements Initializable {
     }
 
     private void initializeSubscribersTable() {
+        tblSubscribers03.setPlaceholder(new Label("Aucun abonné trouvé."));
+
         TableColumn<Subscriber, Integer> idCol = new TableColumn<>("Identifiant");
         idCol.setMinWidth(125);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -243,6 +249,8 @@ public class Controller implements Initializable {
     }
 
     private void initializeBooksTable() {
+        tblBooks04.setPlaceholder(new Label("Aucun livre trouvé."));
+
         TableColumn<Book, Integer> idCol = new TableColumn<>("Identifiant");
         idCol.setMinWidth(125);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -334,13 +342,57 @@ public class Controller implements Initializable {
     }
     // === END OF BOOKS PANE LOGIC ===
 
+    // === START OF LOAN PANE LOGIC ===
     private void runLoanPaneLogic() {
         btnGoBack05.setOnMouseClicked(e -> showPane(paneMain));
     }
+    // === END OF LOAN PANE LOGIC ===
 
+    // === START OF DISPONIBILITY PANE LOGIC ===
     private void runDisponibilityPaneLogic() {
+        initializeDisponibilityTables();
         btnGoBack06.setOnMouseClicked(e -> showPane(paneMain));
     }
+
+    private void initializeDisponibilityTables() {
+        tblLoanedBooks06.setPlaceholder(new Label("Aucun livre prêté trouvé."));
+        tblAvailableBooks06.setPlaceholder(new Label("Aucun livre disponible trouvé."));
+
+        TableColumn<BookToLoan, Integer> loanedBookIdCol = new TableColumn<>("ID Livre");
+        loanedBookIdCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+
+        TableColumn<BookToLoan, String> loanedBookTitleCol = new TableColumn<>("Titre Livre");
+        loanedBookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
+
+        TableColumn<BookToLoan, Integer> loanedSubscriberIdCol = new TableColumn<>("ID Emprunteur");
+        loanedSubscriberIdCol.setCellValueFactory(new PropertyValueFactory<>("subscriberId"));
+
+        TableColumn<BookToLoan, String> loanedSubscriberFullnameCol = new TableColumn<>("Nom Emprunteur");
+        loanedSubscriberFullnameCol.setCellValueFactory(new PropertyValueFactory<>("subscriberFullname"));
+
+        tblLoanedBooks06.getColumns().addAll(
+                loanedBookIdCol,
+                loanedBookTitleCol,
+                loanedSubscriberIdCol,
+                loanedSubscriberFullnameCol
+        );
+
+        TableColumn<BookToLoan, Integer> availableBookIdCol = new TableColumn<>("ID Livre");
+        availableBookIdCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+
+        TableColumn<BookToLoan, String> availableBookTitleCol = new TableColumn<>("Titre Livre");
+        availableBookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
+
+        tblAvailableBooks06.getColumns().addAll(availableBookIdCol, availableBookTitleCol);
+    }
+
+    private void updateDisponibilityTablesRows() {
+        tblLoanedBooks06.getItems().clear();
+        tblLoanedBooks06.getItems().addAll(DB.getLoanedBooks(true));
+        tblAvailableBooks06.getItems().clear();
+        tblAvailableBooks06.getItems().addAll(DB.getAvailableBooks());
+    }
+    // === END OF DISPONIBILITY PANE LOGIC ===
 
     private String getWelcomeMsg() {
         int h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -359,6 +411,7 @@ public class Controller implements Initializable {
 
         if (pane == paneSubscribers) updateSubscribersTableRows();
         if (pane == paneBooks) updateBooksTableRows();
+        if (pane == paneDisponibility) updateDisponibilityTablesRows();
 
         pane.setVisible(true);
         currPane = pane;

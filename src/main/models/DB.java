@@ -309,7 +309,7 @@ public class DB {
                             rs.getInt("bookId"),
                             rs.getString("bookTitle"),
                             rs.getInt("subscriberId"),
-                            rs.getString("subscriberTitle")
+                            rs.getString("subscriberFullname")
                     );
                     books.add(iterBook);
                 }
