@@ -2,7 +2,8 @@
 
 ## About
 
-University Library Management System
+University Library Management System<br />
+You can read the requirements [here](mini-projet-programmation-java.pdf).
 
 ## Notes
 
@@ -48,3 +49,12 @@ University Library Management System
 
 - [X] Get loaned books (joinSubscriber: boolean) -> bookId, bookTitle, subscriberId, subscriberFullname
 - [X] Get available books () -> bookId, bookTitle
+
+## Demo
+
+![00](screenshots/00.png)
+![01](screenshots/01.png)
+![02](screenshots/02.png)
+![03](screenshots/03.png)
+![04](screenshots/04.png)
+![05](screenshots/05.png)
