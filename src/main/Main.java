@@ -53,7 +53,7 @@ public class Main extends Application {
 	public static void initDirs() {
 		try {
 			String command = String.format("mkdir %s", backupsDir);
-			Runtime.getRuntime().exec("cmd /c " + command);
+			Runtime.getRuntime().exec(command);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getCause();
