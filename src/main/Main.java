@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import java.nio.file.*;
 import main.models.DB;
 import main.utils.Dialog;
 
@@ -13,8 +14,8 @@ import java.util.Objects;
 
 public class Main extends Application {
 	public static Stage primaryStage;
-	public static final String appDir = "C:\\UVT-HICS\\ULMS\\";
-	public static final String backupsDir = "C:\\UVT-HICS\\ULMS\\BackUps\\";
+	public static final String appDir = "/UVT-HICS/ULMS/";
+	public static final String backupsDir = "/UVT-HICS/ULMS/BackUps/";
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -52,8 +53,10 @@ public class Main extends Application {
 
 	public static void initDirs() {
 		try {
-			String command = String.format("mkdir %s", backupsDir);
-			Runtime.getRuntime().exec(command);
+			Path path = Paths.get(backupsDir);
+			Files.createDirectories(path);
+			path = Paths.get(appDir);
+			Files.createDirectories(path);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getCause();
